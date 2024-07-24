@@ -1,0 +1,12 @@
+body {
+    width: 500px;
+    background-color: black;
+    color: #E2E2E2;
+}
+.section {
+    background-color: #1E1E1E;
+}
+.btn {
+    background-color: #3E3E3E;
+    margin-bottom: 8px;
+}
