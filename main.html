@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="main.css">
     <script src="main.js"></script>
 </head>
-<body>
+<body onload="getUserInformation()">
     <div class="container text-center">
         <div class="defaultRow">
             <div class="col">
@@ -29,13 +29,14 @@
             </div>
         </div>
         <div class="row">
-            <div class="col">
+            <div class="col-6">
                 <div class="section container rounded">
                     <h5>My Websites</h5>
-                    <ul id="siteList"></ul>
+                    <ul class="list-group text-break" id="siteList">
+                    </ul>
                 </div>
             </div>
-            <div class="col">
+            <div class="col-6">
                 <div class="section container rounded">
                     <h5>Featured Palettes</h5>
                 </div>
