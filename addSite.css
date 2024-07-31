@@ -1,0 +1,28 @@
+body {
+    width: 500px;
+    background-color: black;
+    color: #E2E2E2;
+    cursor: url('Assets/Default Cursor.png'), auto;
+}
+
+.section {
+    background-color: #1E1E1E;
+    margin-bottom: 8px;
+    padding-right: 8px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.finish {
+    background-color: lightgreen;
+    margin-bottom: 8px;
+}
+.btn {
+    background-color: #3E3E3E;
+    margin-bottom: 8px;
+}
+
+.applyChangeBtn {
+    background-color: green;
+    color: #E2E2E2;
+}
