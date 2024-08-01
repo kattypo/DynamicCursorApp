@@ -3,22 +3,20 @@ window.addEventListener('load', function () {
     backBtn.addEventListener("click", function () {
         loadMainPage();
     });
+    loadSitePage();
 });
 function loadMainPage() {
     window.location.href = "main.html";
 }
 function loadSitePage() {
-    let siteNameLabel = document.getElementById("siteNameLabel");
     let siteName;
+    let siteNameLabel = document.getElementById("siteNameLabel");
     (async () => {
         const [tab] = await chrome.tabs.query({ active: true, lastFocusedWindow: true });
         siteName = tab.url;
+        siteNameLabel.innerHTML = siteName;
     })();
     
-}
-
-function getCurrentSite() {
-
 }
 function addSite() {
 

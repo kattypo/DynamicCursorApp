@@ -8,10 +8,8 @@ body {
 .section {
     background-color: #1E1E1E;
     margin-bottom: 8px;
-    padding-right: 8px;
-    padding-top: 8px;
-    padding-bottom: 8px;
 }
+
 .palette {
     background-color: #3E3E3E;
     margin-bottom: 8px;
