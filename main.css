@@ -1,6 +1,6 @@
 body {
-    width: 500px;
-    background-color: black;
+    width: 350px;
+    background-color: #0B0B0B;
     color: #E2E2E2;
     cursor: url('Assets/Default Cursor.png'), auto;
 }
@@ -12,8 +12,11 @@ body {
     padding-bottom: 8px;
 }
 .btn {
-    background-color: #3E3E3E;
+    background-color: #3EE258;
     margin-bottom: 8px;
+    color: black;
+    width: 145px;
+    font-weight: bold;
 }
 ul{
     list-style-type: none;

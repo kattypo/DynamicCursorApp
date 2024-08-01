@@ -1,6 +1,6 @@
 body {
-    width: 500px;
-    background-color: black;
+    width: 350px;
+    background-color: #0B0B0B;
     color: #E2E2E2;
     cursor: url('Assets/Default Cursor.png'), auto;
 }
@@ -11,6 +11,10 @@ body {
     padding-right: 8px;
     padding-top: 8px;
     padding-bottom: 8px;
+}
+.palette {
+    background-color: #3E3E3E;
+    margin-bottom: 8px;
 }
 
 .finish {
@@ -23,6 +27,9 @@ body {
 }
 
 .applyChangeBtn {
-    background-color: green;
-    color: #E2E2E2;
+    background-color: #3EE258;
+    margin-bottom: 8px;
+    color: black;
+    width: 145px;
+    font-weight: bold;
 }
