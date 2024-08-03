@@ -8,6 +8,7 @@ let sites = ["https://my.unf.edu/",
 
 
 window.addEventListener('load', function () {
+    loadMainPage();
     let addSiteBtn = document.getElementById("addSiteBtn");
     addSiteBtn.addEventListener("click", function () {
         loadSitePage();
