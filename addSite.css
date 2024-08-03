@@ -19,6 +19,7 @@ body {
     background-color: lightgreen;
     margin-bottom: 8px;
 }
+
 .btn {
     background-color: #3E3E3E;
     margin-bottom: 8px;
@@ -29,5 +30,10 @@ body {
     margin-bottom: 8px;
     color: black;
     width: 145px;
+    font-size: 14px;
     font-weight: bold;
 }
+.darkModeSettings {
+    display: none;
+}
+
