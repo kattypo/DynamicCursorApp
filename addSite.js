@@ -6,10 +6,11 @@ window.addEventListener('load', function () {
     let darkModeBtn = document.getElementById("darkModeBtn");
 
     backBtn.addEventListener("click", function () {
-        loadMainPage();
+        window.location.href = "main.html";
     });
-    backBtn.addEventListener("click", function () {
-        loadMainPage();
+    strokeColorPicker.addEventListener("input", function (event) {
+        let customCursor = document.getElementById("cursorPath");
+        cursorPath.style.stroke = event.target.value;
     });
     fillColorPicker.addEventListener("input", function (event) {
         let customCursor = document.getElementById("cursorPath");
@@ -23,10 +24,6 @@ window.addEventListener('load', function () {
         let darkCustomCursor = document.getElementById("darkCursorPath");
         darkCursorPath.style.fill = event.target.value;
     });
-    strokeColorPicker.addEventListener("input", function (event) {
-        let customCursor = document.getElementById("cursorPath");
-        cursorPath.style.stroke = event.target.value;
-    });
     darkModeBtn.addEventListener("click", function () {
         let darkModeSettings = document.getElementById("darkModeSettings");
         if (darkModeSettings.style.display !== 'flex') {
@@ -38,12 +35,8 @@ window.addEventListener('load', function () {
             darkModeBtn.innerHTML = "Enable Dark Mode";
         }
     });
-
     loadSitePage();
 });
-function loadMainPage() {
-    window.location.href = "main.html";
-}
 function loadSitePage() {
     let siteName;
     let siteNameLabel = document.getElementById("siteNameLabel");
@@ -52,7 +45,6 @@ function loadSitePage() {
         siteName = tab.url;
         siteNameLabel.innerHTML = siteName;
     })();
-
 }
 function addSite() {
 
