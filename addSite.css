@@ -36,4 +36,16 @@ body {
 .darkModeSettings {
     display: none;
 }
+.form-control {
+    background-color: #1E1E1E;
+    color: white;
+}
+input::file-selector-button {
+    background-color: #3E3E3E;
+    margin-bottom: 8px;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+}
+}
 

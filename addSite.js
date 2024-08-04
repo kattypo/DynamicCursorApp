@@ -3,25 +3,27 @@ window.addEventListener('load', function () {
     let backBtn = document.getElementById("backBtn");
     let strokeColorPicker = document.getElementById("strokeColorPicker");
     let fillColorPicker = document.getElementById("fillColorPicker");
+    let darkStrokeColorPicker = document.getElementById("darkStrokeColorPicker");
+    let darkFillColorPicker = document.getElementById("darkFillColorPicker");
     let darkModeBtn = document.getElementById("darkModeBtn");
 
     backBtn.addEventListener("click", function () {
         window.location.href = "main.html";
     });
     strokeColorPicker.addEventListener("input", function (event) {
-        let customCursor = document.getElementById("cursorPath");
-        cursorPath.style.stroke = event.target.value;
+        let customCursorPath = document.getElementById("customCursorPath");
+        customCursorPath.style.stroke = event.target.value;
     });
     fillColorPicker.addEventListener("input", function (event) {
-        let customCursor = document.getElementById("cursorPath");
-        cursorPath.style.fill = event.target.value;
+        let customCursorPath = document.getElementById("customCursorPath");
+        customCursorPath.style.fill = event.target.value;
     });
     darkStrokeColorPicker.addEventListener("input", function (event) {
-        let darkCustomCursor = document.getElementById("darkCursorPath");
+        let darkCursorPath = document.getElementById("darkCursorPath");
         darkCursorPath.style.stroke = event.target.value;
     });
     darkFillColorPicker.addEventListener("input", function (event) {
-        let darkCustomCursor = document.getElementById("darkCursorPath");
+        let darkCursorPath = document.getElementById("darkCursorPath");
         darkCursorPath.style.fill = event.target.value;
     });
     darkModeBtn.addEventListener("click", function () {
