@@ -6,6 +6,7 @@ window.addEventListener('load', function () {
     let darkStrokeColorPicker = document.getElementById("darkStrokeColorPicker");
     let darkFillColorPicker = document.getElementById("darkFillColorPicker");
     let darkModeBtn = document.getElementById("darkModeBtn");
+    let customImageFile = document.getElementById("customImageFile");
 
     backBtn.addEventListener("click", function () {
         window.location.href = "main.html";
@@ -35,6 +36,21 @@ window.addEventListener('load', function () {
         else {
             darkModeSettings.style.display = 'none';
             darkModeBtn.innerHTML = "Enable Dark Mode";
+        }
+    });
+    customImageFile.addEventListener("change", function (event) {
+        let selectedFile;
+        let customCursorImage = document.getElementById('customCursorImage');
+        let imagePreview = document.getElementById("imagePreview");
+        if (event.target.files.length > 0) {
+            selectedFile = event.target.files[0];
+            let reader = new FileReader();
+            customCursorImage.title = selectedFile.name;
+            reader.onload = function (event) {
+                customCursorImage.src = event.target.result;
+            };
+            reader.readAsDataURL(selectedFile);
+            imagePreview.style.display = 'flex';
         }
     });
     loadSitePage();

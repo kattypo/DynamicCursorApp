@@ -36,6 +36,13 @@ body {
 .darkModeSettings {
     display: none;
 }
+.imagePreview {
+    display: none;
+}
+.customCursorImage {
+    max-height: 128px;
+    max-width: 128px;
+}
 .form-control {
     background-color: #1E1E1E;
     color: white;
@@ -46,6 +53,5 @@ input::file-selector-button {
     border-radius: 4px;
     color: white;
     font-size: 16px;
-}
 }
 
