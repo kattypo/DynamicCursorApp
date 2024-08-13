@@ -2,11 +2,6 @@
 
 let defaultCursorStroke = "black";
 let defaultCursorFill = "white";
-let sites = ["https://my.unf.edu/",
-    "https://mail.google.com/", "https://getbootstrap.com/", "https://stackoverflow.com/", "https://chromewebstore.google.com/?hl=en",
-    "https://www.uwgb.edu/", "pbs.com"];
-
-
 window.addEventListener('load', function () {
     loadMainPage();
     let addSiteBtn = document.getElementById("addSiteBtn");
@@ -23,11 +18,19 @@ function loadSitePage() {
 }
 function getSiteList() {
     let list = document.getElementById("siteList");
-    for (let i = 0; i < sites.length; ++i) {
-        let li = document.createElement('li');
-        li.innerHTML = sites[i];
-        list.appendChild(li);
-    }
+    chrome.storage.sync.get('siteSettings', function (result) {
+        if (chrome.runtime.lastError) {
+            console.error('Error retrieving siteSettings:', chrome.runtime.lastError);
+            return;
+        }
+        let siteSettings = result.siteSettings || [];
+/*        console.log('Retrieved array:', siteSettings);*/
+        for (let i = 0; i < siteSettings.length; ++i) {
+            let li = document.createElement('li');
+            li.innerHTML = siteSettings[i].name;
+            list.appendChild(li);
+        }
+    });
 }
 function getDefaultCursor() {
 

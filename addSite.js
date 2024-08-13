@@ -1,14 +1,14 @@
+let siteName = null;
 let strokeColor = "#3EE258";
 let fillColor = "#000000";
 let darkStrokeColor = "#000000";
 let darkFillColor = "#3EE258";
 let darkModeEnabled = false;
 
-let siteSettings = {
+let site = {
     name: null,
     lightMode: null,
-    darkMode: null,
-    domainEnabled: null
+    darkMode: null
 };
 window.addEventListener('load', function () {
     let backBtn = document.getElementById("backBtn");
@@ -24,9 +24,19 @@ window.addEventListener('load', function () {
         window.location.href = "main.html";
     });
     applyBtn.addEventListener("click", function () {
-        let body = document.body;
-        let cursorData = buildCursor(fillColor, strokeColor);
-        body.style.cursor = 'url(' + cursorData + '), auto';
+/*        let body = document.body;*/
+        if (siteName != null) {
+            site.name = siteName;
+            let cursorData = buildCursor(fillColor, strokeColor);
+            site.lightMode = cursorData;
+            if (darkModeEnabled) {
+                let darkCursorData = buildCursor(darkFillColor, darkStrokeColor);
+                site.darkMode = darkCursorData;
+            }
+            addToStorage();
+/*            body.style.cursor = 'url(' + cursorData + '), auto';*/
+
+        }
     });
     strokeColorPicker.addEventListener("input", function (event) {
         let customCursorPath = document.getElementById("customCursorPath");
@@ -88,14 +98,14 @@ window.addEventListener('load', function () {
     loadSitePage();
 });
 function loadSitePage() {
-    let siteName;
+    let name;
     let siteNameLabel = document.getElementById("siteNameLabel");
     (async () => {
         const [tab] = await chrome.tabs.query({ active: true, lastFocusedWindow: true });
-        siteName = tab.url;
-        siteNameLabel.innerHTML = siteName;
+        name = tab.url;
+        siteNameLabel.innerHTML = name;
+        siteName = name;
     })();
-    siteSettings.name = siteName;
 }
 function convertToDataURL(input) {
     let encodedSvg = encodeURIComponent(input).replace(/#/g, '%23');
@@ -108,4 +118,22 @@ function buildCursor(fill, stroke) {
     svgImage = svgImage.replace(/stroke:.*?;/g, "stroke: " + stroke + ";");
     let dataURL = convertToDataURL(svgImage);
     return dataURL;
+}
+function addToStorage() {
+    chrome.storage.sync.get('siteSettings', function (result) {
+        if (chrome.runtime.lastError) {
+            console.error('Error retrieving siteSettings:', chrome.runtime.lastError);
+            return;
+        }
+        let siteSettings = result.siteSettings || [];
+        console.log('Retrieved array:', siteSettings);
+        siteSettings.push(site);
+        chrome.storage.sync.set({ siteSettings: siteSettings }, function () {
+            if (chrome.runtime.lastError) {
+                console.error('Error storing updated siteSettings:', chrome.runtime.lastError);
+                return;
+            }
+            console.log('Updated siteSettings stored successfully.');
+        });
+    });
 }
