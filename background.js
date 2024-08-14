@@ -12,3 +12,14 @@ chrome.runtime.onInstalled.addListener(function (details) {
         });
     }
 });
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    if (message.command === 'getTabUrl') {
+        // Query the active tab in the current window
+        chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tabs) => {
+            const tab = tabs[0];
+            sendResponse({ url: tab.url });
+        });
+        // Indicate that you want to send a response asynchronously
+        return true;
+    }
+});
