@@ -5,16 +5,23 @@ let defaultCursorFill = "white";
 window.addEventListener('load', function () {
     loadMainPage();
     let addSiteBtn = document.getElementById("addSiteBtn");
+    let siteSettingsBtn = document.getElementById("siteSettingsBtn");
     addSiteBtn.addEventListener("click", function () {
-        loadSitePage();
+        loadAddSitePage();
+    });
+    siteSettingsBtn.addEventListener("click", function () {
+        loadSiteSettingsPage();
     });
 });
 function loadMainPage() {
     getSiteList();
     getDefaultCursor();
 }
-function loadSitePage() {
+function loadAddSitePage() {
     window.location.href = "addSite.html";
+}
+function loadSiteSettingsPage() {
+    window.location.href = "siteSettings.html";
 }
 function getSiteList() {
     let list = document.getElementById("siteList");
@@ -24,7 +31,7 @@ function getSiteList() {
             return;
         }
         let siteSettings = result.siteSettings || [];
-/*        console.log('Retrieved array:', siteSettings);*/
+        console.log('Retrieved array:', siteSettings);
         for (let i = 0; i < siteSettings.length; ++i) {
             let li = document.createElement('li');
             li.innerHTML = siteSettings[i].name;
