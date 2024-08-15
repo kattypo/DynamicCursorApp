@@ -1,14 +1,11 @@
 let siteName = null;
 let strokeColor = "#3EE258";
 let fillColor = "#000000";
-let darkStrokeColor = "#000000";
-let darkFillColor = "#3EE258";
-let darkModeEnabled = false;
 
 let site = {
     name: null,
-    lightMode: null,
-    darkMode: null
+    strokeSetting: null,
+    fillSetting: null
 };
 window.addEventListener('load', function () {
     let backBtn = document.getElementById("backBtn");
@@ -24,18 +21,11 @@ window.addEventListener('load', function () {
         window.location.href = "main.html";
     });
     applyBtn.addEventListener("click", function () {
-/*        let body = document.body;*/
         if (siteName != null) {
             site.name = siteName;
-            let cursorData = buildCursor(fillColor, strokeColor);
-            site.lightMode = cursorData;
-            if (darkModeEnabled) {
-                let darkCursorData = buildCursor(darkFillColor, darkStrokeColor);
-                site.darkMode = darkCursorData;
-            }
+            site.strokeSetting = strokeColor;
+            site.fillSetting = fillColor;
             addToStorage();
-/*            body.style.cursor = 'url(' + cursorData + '), auto';*/
-
         }
     });
     strokeColorPicker.addEventListener("input", function (event) {
@@ -52,33 +42,34 @@ window.addEventListener('load', function () {
     fillColorPicker.addEventListener("change", function (event) {
         fillColor = event.target.value;
     });
-    darkStrokeColorPicker.addEventListener("input", function (event) {
-        let darkCursorPath = document.getElementById("darkCursorPath");
-        darkCursorPath.style.stroke = event.target.value;
-    });
-    darkStrokeColorPicker.addEventListener("change", function (event) {
-        darkStrokeColor = event.target.value;
-    });
-    darkFillColorPicker.addEventListener("input", function (event) {
-        let darkCursorPath = document.getElementById("darkCursorPath");
-        darkCursorPath.style.fill = event.target.value;
-    });
-    darkFillColorPicker.addEventListener("change", function (event) {
-        darkFillColor = event.target.value;
-    });
-    darkModeBtn.addEventListener("click", function () {
-        let darkModeSettings = document.getElementById("darkModeSettings");
-        if (darkModeSettings.style.display !== 'flex') {
-            darkModeSettings.style.display = 'flex';
-            darkModeBtn.innerHTML = "Disable Dark Mode";
-            darkModeEnabled = true;
-        }
-        else {
-            darkModeSettings.style.display = 'none';
-            darkModeBtn.innerHTML = "Enable Dark Mode";
-            darkModeEnabled = false;
-        }
-    });
+    //revamp to be used for the hand icon
+    //darkStrokeColorPicker.addEventListener("input", function (event) {
+    //    let darkCursorPath = document.getElementById("darkCursorPath");
+    //    darkCursorPath.style.stroke = event.target.value;
+    //});
+    //darkStrokeColorPicker.addEventListener("change", function (event) {
+    //    darkStrokeColor = event.target.value;
+    //});
+    //darkFillColorPicker.addEventListener("input", function (event) {
+    //    let darkCursorPath = document.getElementById("darkCursorPath");
+    //    darkCursorPath.style.fill = event.target.value;
+    //});
+    //darkFillColorPicker.addEventListener("change", function (event) {
+    //    darkFillColor = event.target.value;
+    //});
+    //darkModeBtn.addEventListener("click", function () {
+    //    let darkModeSettings = document.getElementById("darkModeSettings");
+    //    if (darkModeSettings.style.display !== 'flex') {
+    //        darkModeSettings.style.display = 'flex';
+    //        darkModeBtn.innerHTML = "Disable Dark Mode";
+    //        darkModeEnabled = true;
+    //    }
+    //    else {
+    //        darkModeSettings.style.display = 'none';
+    //        darkModeBtn.innerHTML = "Enable Dark Mode";
+    //        darkModeEnabled = false;
+    //    }
+    //});
     customImageFile.addEventListener("change", function (event) {
         let selectedFile;
         let customCursorImage = document.getElementById('customCursorImage');
@@ -98,13 +89,15 @@ window.addEventListener('load', function () {
     loadSitePage();
 });
 function loadSitePage() {
-    let name;
+    let domain;
     let siteNameLabel = document.getElementById("siteNameLabel");
     (async () => {
         const [tab] = await chrome.tabs.query({ active: true, lastFocusedWindow: true });
-        name = tab.url;
-        siteNameLabel.innerHTML = name;
-        siteName = name;
+        let name = tab.url;
+        let parsedUrl = new URL(name);
+        domain = parsedUrl.hostname;
+        siteNameLabel.innerHTML = domain;
+        siteName = domain;
     })();
 }
 function convertToDataURL(input) {
@@ -122,18 +115,18 @@ function buildCursor(fill, stroke) {
 function addToStorage() {
     chrome.storage.sync.get('siteSettings', function (result) {
         if (chrome.runtime.lastError) {
-            console.error('Error retrieving siteSettings:', chrome.runtime.lastError);
+            console.error('Error retrieving stored settngs:', chrome.runtime.lastError);
             return;
         }
         let siteSettings = result.siteSettings || [];
-        console.log('Retrieved array:', siteSettings);
         siteSettings.push(site);
+        console.log('New array:', siteSettings);
         chrome.storage.sync.set({ siteSettings: siteSettings }, function () {
             if (chrome.runtime.lastError) {
-                console.error('Error storing updated siteSettings:', chrome.runtime.lastError);
+                console.error('Error updating stored settings:', chrome.runtime.lastError);
                 return;
             }
-            console.log('Updated siteSettings stored successfully.');
+            console.log('Updated stored sites successfully.');
         });
     });
 }
