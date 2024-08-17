@@ -3,3 +3,22 @@ body {
     background-color: #0B0B0B;
     color: #E2E2E2;
 }
+.section {
+    background-color: #1E1E1E;
+    margin-bottom: 8px;
+    padding-right: 8px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+.editBtn {
+    background-color: #3EE258;
+    margin-bottom: 8px;
+    color: black;
+    font-size: 14px;
+    font-weight: bold;
+    width: 130px;
+}
+.removeBtn {
+    margin-bottom: 8px;
+    width: 130px;
+}
