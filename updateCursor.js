@@ -1,5 +1,4 @@
 let siteName;
-
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', onPageLoad);
 }
@@ -29,10 +28,10 @@ function getTabUrl() {
         });
     });
 }
-function updateCursor(domain) { //done
+function updateCursor(domain) { //builds the basic cursor when the tab loads
     chrome.storage.sync.get('siteSettings', function (result) {
         if (chrome.runtime.lastError) {
-            console.error('Error retrieving siteSettings:', chrome.runtime.lastError);
+            console.error('Error retrieving site settings:', chrome.runtime.lastError);
             return;
         }
         let siteSettings = result.siteSettings || [];
@@ -52,7 +51,6 @@ function updateCursor(domain) { //done
 function modifyUrl(tabUrl) { //gets the domain name from the URL
     const parsedUrl = new URL(tabUrl);
     let domain = parsedUrl.hostname;
-    console.log('This is the domain: ' + domain);
     return domain;
 
 }
@@ -63,7 +61,7 @@ function onPageLoad() {
             siteName = name;
             updateCursor(siteName);
         } catch (error) {
-            console.error('Error handling site name:', error);
+            console.error('Error getting site name:', error);
         }
     })();
 }
@@ -75,8 +73,3 @@ function buildCursor(fill, stroke) {
     let convertedData = 'data:image/svg+xml;utf8,' + encodedSvg;
     return convertedData;
 }
-//function convertToDataURL(input) {
-//    let encodedSvg = encodeURIComponent(input).replace(/#/g, '%23');
-//    let convertedData = 'data:image/svg+xml;utf8,' + encodedSvg;
-//    return convertedData;
-//}

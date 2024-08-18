@@ -1,33 +1,27 @@
 'use strict';
 
-let defaultCursorStroke = "black";
-let defaultCursorFill = "white";
+let defaultCursorStroke = "black";//edit
+let defaultCursorFill = "white";//edit
 window.addEventListener('load', function () {
     loadMainPage();
     let addSiteBtn = document.getElementById("addSiteBtn");
     let siteSettingsBtn = document.getElementById("siteSettingsBtn");
     addSiteBtn.addEventListener("click", function () {
-        loadAddSitePage();
+        window.location.href = "addSite.html";
     });
     siteSettingsBtn.addEventListener("click", function () {
-        loadSiteSettingsPage();
+        window.location.href = "siteSettings.html";
     });
 });
 function loadMainPage() {
     getSiteList();
     getDefaultCursor();
 }
-function loadAddSitePage() {
-    window.location.href = "addSite.html";
-}
-function loadSiteSettingsPage() {
-    window.location.href = "siteSettings.html";
-}
 function getSiteList() {
     let list = document.getElementById("siteList");
     chrome.storage.sync.get('siteSettings', function (result) {
         if (chrome.runtime.lastError) {
-            console.error('Error retrieving siteSettings:', chrome.runtime.lastError);
+            console.error('Error retrieving site settings:', chrome.runtime.lastError);
             return;
         }
         let siteSettings = result.siteSettings || [];
@@ -39,8 +33,7 @@ function getSiteList() {
         }
     });
 }
-function getDefaultCursor() {
-
+function getDefaultCursor() { //edit
     document.getElementById('cursorPath').style.stroke = defaultCursorStroke;
     document.getElementById('cursorPath').style.fill = defaultCursorFill;
 }

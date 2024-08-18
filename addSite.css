@@ -3,27 +3,22 @@ body {
     background-color: #0B0B0B;
     color: #E2E2E2;
 }
-
 .section {
     background-color: #1E1E1E;
     margin-bottom: 8px;
 }
-
 .palette {
     background-color: #3E3E3E;
     margin-bottom: 8px;
 }
-
 .finish {
     background-color: lightgreen;
     margin-bottom: 8px;
 }
-
 .btn {
     background-color: #3E3E3E;
     margin-bottom: 8px;
 }
-
 .applyChangeBtn {
     background-color: #3EE258;
     margin-bottom: 8px;
