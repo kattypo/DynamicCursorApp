@@ -5,7 +5,6 @@ window.addEventListener('load', function () {
         window.location.href = "main.html";
     });
 });
-
 function loadPage() {
     let list = document.getElementById("siteList");
     chrome.storage.sync.get('siteSettings', function (result) {
@@ -54,18 +53,30 @@ function addScreenElement(siteData, i) {
     removeButton.textContent = 'Remove'; 
 
     editButton.addEventListener('click', function () {
-        //add stuff here
-        //will use import and export
-        //declare the function in a shared js file
-        //import the set function and change the information
-        //load the edit page
-        //when loading the page,import the get function and get the information before storing 
-        //then set the function to no value 
+        chrome.storage.sync.get('siteDataToUpdate', function (result) {
+            if (chrome.runtime.lastError) {
+                console.error('Error retrieving site data to update:', chrome.runtime.lastError);
+                return;
+            }
+            let siteDataToUpdate = result.siteDataToUpdate || {};
+            siteDataToUpdate.name = siteData.name;
+            siteDataToUpdate.strokeSetting = siteData.strokeSetting;
+            siteDataToUpdate.fillSetting = siteData.fillSetting;
+            siteDataToUpdate.position = i;
+            chrome.storage.sync.set({ siteDataToUpdate: siteDataToUpdate }, function () {
+                if (chrome.runtime.lastError) {
+                    console.error('Error setting site data to update:', chrome.runtime.lastError);
+                    return;
+                }
+                console.log('Successfully sent site data to update');
+                window.location.href = "editSite.html";
+            });
+        });
     });
     removeButton.addEventListener('click', function () {
         chrome.storage.sync.get('siteSettings', function (result) {
             if (chrome.runtime.lastError) {
-                console.error('Error retrieving stored settngs:', chrome.runtime.lastError);
+                console.error('Error retrieving stored settings:', chrome.runtime.lastError);
                 return;
             }
             let siteSettings = result.siteSettings || [];
@@ -76,6 +87,7 @@ function addScreenElement(siteData, i) {
                     return;
                 }
                 console.log('Updated stored sites successfully.');
+                window.location.href = "main.html";
             });
         });
     });
