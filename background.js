@@ -24,16 +24,27 @@ chrome.runtime.onInstalled.addListener(function (details) {
                 console.log('siteDataToUpdate already initialized:');
             }
         });
+        chrome.storage.sync.get('defaultCursorSettings', function (result) {
+            if (result.defaultCursorSettings === undefined) {
+                const defaultCursor = {
+                    strokeSetting: "#000000",
+                    fillSetting: "#FFFFFF"
+                };
+                chrome.storage.sync.set({ defaultCursorSettings: defaultCursor }, function () {
+                    console.log('Initialized default cursor settings.');
+                });
+            } else {
+                console.log('Default cursor settings already initialized:');
+            }
+        });
     }
 });
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.command === 'getTabUrl') {
-        // Query the active tab in the current window
         chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tabs) => {
             const tab = tabs[0];
             sendResponse({ url: tab.url });
         });
-        // Indicate that you want to send a response asynchronously
         return true;
     }
 });
