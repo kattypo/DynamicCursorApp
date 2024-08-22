@@ -44,7 +44,18 @@ function updateCursor(domain) { //builds the basic cursor when the tab loads
                 return;
             }
         }
-        console.log('No settings found for this domain.');
+        console.log('No settings found for this domain. Displaying default cursor.');
+        chrome.storage.sync.get('defaultCursorSettings', function (result) {
+            if (chrome.runtime.lastError) {
+                console.error('Error retrieving default cursor settings:', chrome.runtime.lastError);
+                return;
+            }
+            let defaultCursorSettings = result.defaultCursorSettings || {};
+            let body = document.body;
+            let cursorUrl = buildCursor(defaultCursorSettings.fillSetting, defaultCursorSettings.strokeSetting);
+            body.style.cursor = 'url(' + cursorUrl + '), auto';
+            return;
+        });
     });
 }
 
