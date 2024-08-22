@@ -64,22 +64,6 @@ window.addEventListener('load', function () {
     //        darkModeEnabled = false;
     //    }
     //});
-    customImageFile.addEventListener("change", function (event) {
-        let selectedFile;
-        let customCursorImage = document.getElementById('customCursorImage');
-        let imagePreview = document.getElementById("imagePreview");
-        if (event.target.files.length > 0) {
-            selectedFile = event.target.files[0];
-            let reader = new FileReader();
-            customCursorImage.title = selectedFile.name;
-            reader.onload = function (event) {
-                customCursorImage.src = event.target.result;
-            };
-            reader.readAsDataURL(selectedFile);
-            imagePreview.style.display = 'flex';
-            fileUploaded = true;
-        }
-    });
     loadSitePage();
 });
 function loadSitePage() {
@@ -97,7 +81,7 @@ function loadSitePage() {
 function addToStorage() {
     chrome.storage.sync.get('siteSettings', function (result) {
         if (chrome.runtime.lastError) {
-            console.error('Error retrieving stored settngs:', chrome.runtime.lastError);
+            console.error('Error retrieving stored settings:', chrome.runtime.lastError);
             return;
         }
         let siteSettings = result.siteSettings || [];
