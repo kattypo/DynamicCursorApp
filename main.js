@@ -4,13 +4,20 @@ window.addEventListener('load', function () {
     let addSiteBtn = document.getElementById("addSiteBtn");
     let siteSettingsBtn = document.getElementById("siteSettingsBtn");
     let changeDefaultBtn = document.getElementById("changeDefaultBtn");
-    addSiteBtn.addEventListener("click", function () {
-        if (siteSettingsExists()) {
-            console.log('This site already has saved settings.')
-            //display error message
-        }
-        else {
-            window.location.href = "addSite.html";
+    let alertMessage = document.getElementById("alertMessage");
+
+    addSiteBtn.addEventListener("click", async function () {
+        try {
+            if (await siteSettingsExists()) { 
+                console.log('This site already has saved settings.');
+                alertMessage.style.display = 'block';
+            } else {
+                console.log('This site does not have saved settings.');
+                alertMessage.style.display = 'none';
+                window.location.href = "addSite.html";
+            }
+        } catch (error) {
+            console.error('Error checking site settings:', error);
         }
     });
     siteSettingsBtn.addEventListener("click", function () {
@@ -51,14 +58,24 @@ function getDefaultCursor() {
         document.getElementById('cursorPath').style.fill = defaultCursorSettings.fillSetting;
     });
 }
-async function siteSettingsExists() { //checks if the site about to be added already has saved settings
+async function siteSettingsExists() {
+
+    let domain;
+    let settingExists = false;
+
+    // Gets the domain from the active tab
     try {
         const [tab] = await chrome.tabs.query({ active: true, lastFocusedWindow: true });
-        if (!tab || !tab.url) {
-            throw new Error('No active tab or tab URL is missing');
-        }
-        let parsedUrl = new URL(tab.url);
-        let domain = parsedUrl.hostname;
+        let name = tab.url;
+        let parsedUrl = new URL(name);
+        domain = parsedUrl.hostname;
+    } catch (error) {
+        console.error('Error fetching tab:', error);
+        return false; 
+    }
+
+    // Retrieves site settings from storage and checks list for current domain in tab
+    try {
         const result = await new Promise((resolve, reject) => {
             chrome.storage.sync.get('siteSettings', function (result) {
                 if (chrome.runtime.lastError) {
@@ -68,17 +85,17 @@ async function siteSettingsExists() { //checks if the site about to be added alr
                 }
             });
         });
+
         let siteSettings = result.siteSettings || [];
         for (let i = 0; i < siteSettings.length; ++i) {
             if (siteSettings[i].name === domain) {
-                console.log(domain);
-                return true;
+                settingExists = true;
+                break;
             }
         }
-        return false;
-
     } catch (error) {
-        console.error(error);
-        return false;
+        console.error('Error retrieving site settings:', error);
     }
+    return settingExists;
 }
+    
