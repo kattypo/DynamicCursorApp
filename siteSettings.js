@@ -1,6 +1,6 @@
 window.addEventListener('load', function () {
     loadPage();
-    let backBtn = document.getElementById("backBtn");
+    const backBtn = document.getElementById("backBtn");
     backBtn.addEventListener("click", function () {
         window.location.href = "main.html";
     });
@@ -58,7 +58,7 @@ function addScreenElement(siteData, i) {
                 console.error('Error retrieving site data to update:', chrome.runtime.lastError);
                 return;
             }
-            let siteDataToUpdate = result.siteDataToUpdate || {};
+            const siteDataToUpdate = result.siteDataToUpdate || {};
             siteDataToUpdate.name = siteData.name;
             siteDataToUpdate.strokeSetting = siteData.strokeSetting;
             siteDataToUpdate.fillSetting = siteData.fillSetting;
@@ -79,7 +79,7 @@ function addScreenElement(siteData, i) {
                 console.error('Error retrieving stored settings:', chrome.runtime.lastError);
                 return;
             }
-            let siteSettings = result.siteSettings || [];
+            const siteSettings = result.siteSettings || [];
             siteSettings.splice(i, 1);
             chrome.storage.sync.set({ siteSettings: siteSettings }, function () {
                 if (chrome.runtime.lastError) {
@@ -100,6 +100,5 @@ function addScreenElement(siteData, i) {
     parentDiv.appendChild(nameRowDiv);
     parentDiv.appendChild(rowDiv);
     container.appendChild(parentDiv);
-
-    //this page needs a scrollbar
+    container.style.overflowY = 'auto';
 }

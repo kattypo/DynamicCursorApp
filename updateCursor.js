@@ -22,8 +22,8 @@ function getTabUrl() {
             if (chrome.runtime.lastError) {
                 reject(chrome.runtime.lastError);
             } else {
-                const modifiedUrl = modifyUrl(response.url);
-                resolve(modifiedUrl);
+                const domain = new URL(response.url).hostname;
+                resolve(domain);
             }
         });
     });
@@ -34,10 +34,10 @@ function updateCursor(domain) { //builds the basic cursor when the tab loads
             console.error('Error retrieving site settings:', chrome.runtime.lastError);
             return;
         }
-        let siteSettings = result.siteSettings || [];
+        const siteSettings = result.siteSettings || [];
         for (let i = 0; i < siteSettings.length; ++i) {
             if (siteSettings[i].name == domain) {
-                let body = document.body;
+                const body = document.body;
                 let cursorUrl = buildCursor(siteSettings[i].fillSetting, siteSettings[i].strokeSetting);
                 body.style.cursor = 'url(' + cursorUrl + '), auto';
                 console.log('Match found:', domain);
@@ -50,20 +50,13 @@ function updateCursor(domain) { //builds the basic cursor when the tab loads
                 console.error('Error retrieving default cursor settings:', chrome.runtime.lastError);
                 return;
             }
-            let defaultCursorSettings = result.defaultCursorSettings || {};
-            let body = document.body;
+            const defaultCursorSettings = result.defaultCursorSettings || {};
+            const body = document.body;
             let cursorUrl = buildCursor(defaultCursorSettings.fillSetting, defaultCursorSettings.strokeSetting);
             body.style.cursor = 'url(' + cursorUrl + '), auto';
             return;
         });
     });
-}
-
-function modifyUrl(tabUrl) { //gets the domain name from the URL
-    const parsedUrl = new URL(tabUrl);
-    let domain = parsedUrl.hostname;
-    return domain;
-
 }
 function onPageLoad() {
     (async () => {
