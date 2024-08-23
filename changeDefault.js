@@ -3,10 +3,10 @@ const defaultCursor = { //dictionary to be stored
     fillSetting: "#FFFFFF"
 };
 window.addEventListener('load', function () {
-    let backBtn = document.getElementById("backBtn");
-    let applyBtn = document.getElementById("applyBtn");
-    let strokeColorPicker = document.getElementById("strokeColorPicker");
-    let fillColorPicker = document.getElementById("fillColorPicker");
+    const backBtn = document.getElementById("backBtn");
+    const applyBtn = document.getElementById("applyBtn");
+    const strokeColorPicker = document.getElementById("strokeColorPicker");
+    const fillColorPicker = document.getElementById("fillColorPicker");
     backBtn.addEventListener("click", function () {
         window.location.href = "main.html";
     });
@@ -15,14 +15,14 @@ window.addEventListener('load', function () {
         window.location.href = "main.html";
     });
     strokeColorPicker.addEventListener("input", function (event) {
-        let customCursorPath = document.getElementById("customCursorPath");
+        const customCursorPath = document.getElementById("customCursorPath");
         customCursorPath.style.stroke = event.target.value;
     });
     strokeColorPicker.addEventListener("change", function (event) {
         defaultCursor.strokeSetting = event.target.value;
     });
     fillColorPicker.addEventListener("input", function (event) {
-        let customCursorPath = document.getElementById("customCursorPath");
+        const customCursorPath = document.getElementById("customCursorPath");
         customCursorPath.style.fill = event.target.value;
     });
     fillColorPicker.addEventListener("change", function (event) {
@@ -36,7 +36,7 @@ function updateDefault() {
             console.error('Error retrieving stored settings:', chrome.runtime.lastError);
             return;
         }
-        let defaultCursorSettings = result.defaultCursorSettings || {};
+        const defaultCursorSettings = result.defaultCursorSettings || {};
         defaultCursorSettings.strokeSetting = defaultCursor.strokeSetting;
         defaultCursorSettings.fillSetting = defaultCursor.fillSetting;
         chrome.storage.sync.set({ defaultCursorSettings: defaultCursorSettings }, function () {
@@ -54,16 +54,16 @@ function getCurrentDefault() {
             console.error('Error retrieving stored settings:', chrome.runtime.lastError);
             return;
         }
-        let defaultCursorSettings = result.defaultCursorSettings || {};
-        let strokeColorPicker = document.getElementById("strokeColorPicker");
-        let fillColorPicker = document.getElementById("fillColorPicker");
-        let customCursorPath = document.getElementById("customCursorPath");
+        const defaultCursorSettings = result.defaultCursorSettings || {};
+        const strokeColorPicker = document.getElementById("strokeColorPicker");
+        const fillColorPicker = document.getElementById("fillColorPicker");
+        const customCursorPath = document.getElementById("customCursorPath");
 
         defaultCursor.strokeSetting = defaultCursorSettings.strokeSetting;
         defaultCursor.fillSetting = defaultCursorSettings.fillSetting;
         strokeColorPicker.value = defaultCursorSettings.strokeSetting;
-        customCursorPath.style.stroke = defaultCursorSettings.strokeSetting;
         fillColorPicker.value = defaultCursorSettings.fillSetting;
+        customCursorPath.style.stroke = defaultCursorSettings.strokeSetting;
         customCursorPath.style.fill = defaultCursorSettings.fillSetting;
     });
 }
