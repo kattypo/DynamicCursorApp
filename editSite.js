@@ -6,11 +6,10 @@ let site = {
     fillSetting: null
 };
 window.addEventListener('load', function () {
-    let backBtn = document.getElementById("backBtn");
-    let applyBtn = document.getElementById("applyBtn");
-    let strokeColorPicker = document.getElementById("strokeColorPicker");
-    let fillColorPicker = document.getElementById("fillColorPicker");
-    let customImageFile = document.getElementById("customImageFile");
+    const backBtn = document.getElementById("backBtn");
+    const applyBtn = document.getElementById("applyBtn");
+    const strokeColorPicker = document.getElementById("strokeColorPicker");
+    const fillColorPicker = document.getElementById("fillColorPicker");
     backBtn.addEventListener("click", function () {
         window.location.href = "main.html";
     });
@@ -21,34 +20,18 @@ window.addEventListener('load', function () {
         }
     });
     strokeColorPicker.addEventListener("input", function (event) {
-        let customCursorPath = document.getElementById("customCursorPath");
+        const customCursorPath = document.getElementById("customCursorPath");
         customCursorPath.style.stroke = event.target.value;
     });
     strokeColorPicker.addEventListener("change", function (event) {
         site.strokeSetting = event.target.value;
     });
     fillColorPicker.addEventListener("input", function (event) {
-        let customCursorPath = document.getElementById("customCursorPath");
+        const customCursorPath = document.getElementById("customCursorPath");
         customCursorPath.style.fill = event.target.value;
     });
     fillColorPicker.addEventListener("change", function (event) {
         site.fillSetting = event.target.value;
-    });
-    customImageFile.addEventListener("change", function (event) {
-        let selectedFile;
-        let customCursorImage = document.getElementById('customCursorImage');
-        let imagePreview = document.getElementById("imagePreview");
-        if (event.target.files.length > 0) {
-            selectedFile = event.target.files[0];
-            let reader = new FileReader();
-            customCursorImage.title = selectedFile.name;
-            reader.onload = function (event) {
-                customCursorImage.src = event.target.result;
-            };
-            reader.readAsDataURL(selectedFile);
-            imagePreview.style.display = 'flex';
-            fileUploaded = true;
-        }
     });
     insertSiteData();
 });
@@ -58,14 +41,10 @@ function updateStorage() {
             console.error('Error retrieving stored settngs:', chrome.runtime.lastError);
             return;
         }
-        let siteSettings = result.siteSettings || [];
-        for (let i = 0; i < siteSettings.length; ++i) {
-            if (i == position) {
-                siteSettings.splice(i, 1);
-                siteSettings.push(site);
-            }
+        const siteSettings = result.siteSettings || [];
+        if (position != null) {
+            siteSettings[position] = site;
         }
-        console.log('New array:', siteSettings);
         chrome.storage.sync.set({ siteSettings: siteSettings }, function () {
             if (chrome.runtime.lastError) {
                 console.error('Error updating stored settings:', chrome.runtime.lastError);
@@ -81,11 +60,11 @@ function insertSiteData() {
             console.error('Error retrieving site data to update:', chrome.runtime.lastError);
             return;
         }
-        let siteDataToUpdate = result.siteDataToUpdate || {};
-        let siteNameLabel = document.getElementById("siteNameLabel");
-        let strokeColorPicker = document.getElementById("strokeColorPicker");
-        let fillColorPicker = document.getElementById("fillColorPicker");
-        let customCursorPath = document.getElementById("customCursorPath");
+        const siteDataToUpdate = result.siteDataToUpdate || {};
+        const siteNameLabel = document.getElementById("siteNameLabel");
+        const strokeColorPicker = document.getElementById("strokeColorPicker");
+        const fillColorPicker = document.getElementById("fillColorPicker");
+        const customCursorPath = document.getElementById("customCursorPath");
 
         site.name = siteDataToUpdate.name;
         site.strokeSetting = siteDataToUpdate.strokeSetting;
@@ -94,8 +73,8 @@ function insertSiteData() {
 
         siteNameLabel.innerHTML = siteDataToUpdate.name;
         strokeColorPicker.value = siteDataToUpdate.strokeSetting;
-        customCursorPath.style.stroke = siteDataToUpdate.strokeSetting;
         fillColorPicker.value = siteDataToUpdate.fillSetting;
+        customCursorPath.style.stroke = siteDataToUpdate.strokeSetting;
         customCursorPath.style.fill = siteDataToUpdate.fillSetting;
 
         siteDataToUpdate.name = null;
