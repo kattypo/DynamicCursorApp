@@ -1,10 +1,10 @@
 'use strict';
 window.addEventListener('load', function () {
     loadMainPage();
-    let addSiteBtn = document.getElementById("addSiteBtn");
-    let siteSettingsBtn = document.getElementById("siteSettingsBtn");
-    let changeDefaultBtn = document.getElementById("changeDefaultBtn");
-    let alertMessage = document.getElementById("alertMessage");
+    const addSiteBtn = document.getElementById("addSiteBtn");
+    const siteSettingsBtn = document.getElementById("siteSettingsBtn");
+    const changeDefaultBtn = document.getElementById("changeDefaultBtn");
+    const alertMessage = document.getElementById("alertMessage");
 
     addSiteBtn.addEventListener("click", async function () {
         try {
@@ -32,16 +32,16 @@ function loadMainPage() {
     getDefaultCursor();
 }
 function getSiteList() {
-    let list = document.getElementById("siteList");
+    const list = document.getElementById("siteList");
     chrome.storage.sync.get('siteSettings', function (result) {
         if (chrome.runtime.lastError) {
             console.error('Error retrieving site settings:', chrome.runtime.lastError);
             return;
         }
-        let siteSettings = result.siteSettings || [];
+        const siteSettings = result.siteSettings || [];
         console.log('Retrieved array:', siteSettings);
         for (let i = 0; i < siteSettings.length; ++i) {
-            let li = document.createElement('li');
+            const li = document.createElement('li');
             li.innerHTML = siteSettings[i].name;
             list.appendChild(li);
         }
@@ -53,9 +53,10 @@ function getDefaultCursor() {
             console.error('Error retrieving default cursor settings:', chrome.runtime.lastError);
             return;
         }
-        let defaultCursorSettings = result.defaultCursorSettings || {};
-        document.getElementById('cursorPath').style.stroke = defaultCursorSettings.strokeSetting;
-        document.getElementById('cursorPath').style.fill = defaultCursorSettings.fillSetting;
+        const defaultCursorSettings = result.defaultCursorSettings || {};
+        const cursorPath = document.getElementById('cursorPath');
+        cursorPath.style.stroke = defaultCursorSettings.strokeSetting;
+        cursorPath.style.fill = defaultCursorSettings.fillSetting;
     });
 }
 async function siteSettingsExists() {
@@ -66,9 +67,7 @@ async function siteSettingsExists() {
     // Gets the domain from the active tab
     try {
         const [tab] = await chrome.tabs.query({ active: true, lastFocusedWindow: true });
-        let name = tab.url;
-        let parsedUrl = new URL(name);
-        domain = parsedUrl.hostname;
+        domain = new URL(tab.url).hostname;
     } catch (error) {
         console.error('Error fetching tab:', error);
         return false; 
@@ -86,7 +85,7 @@ async function siteSettingsExists() {
             });
         });
 
-        let siteSettings = result.siteSettings || [];
+        const siteSettings = result.siteSettings || [];
         for (let i = 0; i < siteSettings.length; ++i) {
             if (siteSettings[i].name === domain) {
                 settingExists = true;
