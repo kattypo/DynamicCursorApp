@@ -11,7 +11,7 @@ window.addEventListener('load', function () {
     const strokeColorPicker = document.getElementById("strokeColorPicker");
     const fillColorPicker = document.getElementById("fillColorPicker");
     backBtn.addEventListener("click", function () {
-        window.location.href = "main.html";
+        window.location.href = "siteSettings.html";
     });
     applyBtn.addEventListener("click", function () {
         if (site.name != null) {
