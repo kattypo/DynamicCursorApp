@@ -11,13 +11,9 @@ body {
     background-color: #3E3E3E;
     margin-bottom: 8px;
 }
-.finish {
-    background-color: lightgreen;
-    margin-bottom: 8px;
-}
-.btn {
-    background-color: #3E3E3E;
-    margin-bottom: 8px;
+.backBtn {
+    margin-top: 4px;
+    margin-bottom: 10px;
 }
 .applyChangeBtn {
     background-color: #3EE258;
@@ -27,25 +23,5 @@ body {
     font-size: 14px;
     font-weight: bold;
 }
-.darkModeSettings {
-    display: none;
-}
-.imagePreview {
-    display: none;
-}
-.customCursorImage {
-    max-height: 128px;
-    max-width: 128px;
-}
-.form-control {
-    background-color: #1E1E1E;
-    color: white;
-}
-input::file-selector-button {
-    background-color: #3E3E3E;
-    margin-bottom: 8px;
-    border-radius: 4px;
-    color: white;
-    font-size: 16px;
-}
+
 
