@@ -8,10 +8,12 @@ window.addEventListener('load', function () {
     const strokeColorPicker = document.getElementById("strokeColorPicker");
     const fillColorPicker = document.getElementById("fillColorPicker");
     const customCursorPath = document.getElementById("customCursorPath");
+    const classicPalette = document.getElementById("classicPalette");
     const pinkPalette = document.getElementById("pinkPalette");
+    const vintagePalette = document.getElementById("vintagePalette");
     const techPalette = document.getElementById("techPalette");
     const reversePalette = document.getElementById("reversePalette");
-    const magentaPalette = document.getElementById("magentaPalette");
+    const orchidPalette = document.getElementById("orchidPalette");
     backBtn.addEventListener("click", function () {
         window.location.href = "main.html";
     });
@@ -31,6 +33,14 @@ window.addEventListener('load', function () {
     fillColorPicker.addEventListener("change", function (event) {
         defaultCursor.fillSetting = event.target.value;
     });
+    classicPalette.addEventListener("click", function () {
+        customCursorPath.style.stroke = '#0B0B0B';
+        customCursorPath.style.fill = '#FFFFFF';
+        defaultCursor.strokeSetting = '#0B0B0B';
+        defaultCursor.fillSetting = '#FFFFFF';
+        strokeColorPicker.value = '#0B0B0B';
+        fillColorPicker.value = '#FFFFFF';
+    });
     pinkPalette.addEventListener("click", function () {
         customCursorPath.style.stroke = '#FE7171';
         customCursorPath.style.fill = '#FFFFFF';
@@ -38,6 +48,14 @@ window.addEventListener('load', function () {
         defaultCursor.fillSetting = '#FFFFFF';
         strokeColorPicker.value = '#FE7171';
         fillColorPicker.value = '#FFFFFF';
+    });
+    vintagePalette.addEventListener("click", function () {
+        customCursorPath.style.stroke = '#B07154';
+        customCursorPath.style.fill = '#F2DCC9';
+        defaultCursor.strokeSetting = '#B07154';
+        defaultCursor.fillSetting = '#F2DCC9';
+        strokeColorPicker.value = '#B07154';
+        fillColorPicker.value = '#F2DCC9';
     });
     techPalette.addEventListener("click", function () {
         customCursorPath.style.stroke = '#3DDE56';
@@ -55,7 +73,7 @@ window.addEventListener('load', function () {
         strokeColorPicker.value = '#FFFFFF';
         fillColorPicker.value = '#0B0B0B';
     });
-    magentaPalette.addEventListener("click", function () {
+    orchidPalette.addEventListener("click", function () {
         customCursorPath.style.stroke = '#FF00D0';
         customCursorPath.style.fill = '#0B0B0B';
         defaultCursor.strokeSetting = '#FF00D0';

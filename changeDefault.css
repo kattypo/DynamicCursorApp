@@ -38,6 +38,19 @@ body {
     height: 15px;
     justify-content:center;
 }
+.classicRectangle1 {
+    background-color: #0B0B0B;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    width: 15px;
+}
+
+.classicRectangle2 {
+    background-color: #FFFFFF;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    width: 15px;
+}
 .pinkRectangle1 {
     background-color: #FE7171;
     border-top-left-radius: 2px;
@@ -47,6 +60,19 @@ body {
 
 .pinkRectangle2 {
     background-color: #FFFFFF;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    width: 15px;
+}
+.vintageRectangle1 {
+    background-color: #B07154;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    width: 15px;
+}
+
+.vintageRectangle2 {
+    background-color: #F2DCC9;
     border-top-right-radius: 2px;
     border-bottom-right-radius: 2px;
     width: 15px;
@@ -77,14 +103,14 @@ body {
     border-bottom-right-radius: 2px;
     width: 15px;
 }
-.magentaRectangle1 {
+.orchidRectangle1 {
     background-color: #FF00D0;
     border-top-left-radius: 2px;
     border-bottom-left-radius: 2px;
     width: 15px;
 }
 
-.magentaRectangle2 {
+.orchidRectangle2 {
     background-color: #0B0B0B;
     border-top-right-radius: 2px;
     border-bottom-right-radius: 2px;
