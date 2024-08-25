@@ -32,8 +32,10 @@ window.addEventListener('load', function () {
     });
 });
 function loadMainPage() {
+    const container = document.getElementById("container");
     getSiteList();
     getDefaultCursor();
+    container.style.overflowY = 'auto';
 }
 function getSiteList() {
     const list = document.getElementById("siteList");
