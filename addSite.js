@@ -106,10 +106,17 @@ function addToStorage() {
         siteSettings.push(site);
         chrome.storage.sync.set({ siteSettings: siteSettings }, function () {
             if (chrome.runtime.lastError) {
-                console.error('Error updating stored settings:', chrome.runtime.lastError);
+                if (chrome.runtime.lastError.message.includes('QUOTA_BYTES')) {
+                    console.error('Sync storage quota exceeded.');
+                    alertMessage.style.display = 'block';
+                }
+                else {
+                    console.error('Error updating stored settings:', chrome.runtime.lastError);
+                }
                 return;
             }
             console.log('Updated stored sites successfully.');
+            alertMessage.style.display = 'none';
         });
     });
 }
