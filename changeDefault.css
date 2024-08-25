@@ -6,24 +6,87 @@ body {
 
 .section {
     background-color: #1E1E1E;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
 }
 
 .palette {
     background-color: #3E3E3E;
     margin-bottom: 8px;
+    color: white;
+    outline: none;
+    border: none;
+    width: 80px;
 }
 
-.btn {
-    background-color: #3E3E3E;
-    margin-bottom: 8px;
+.backBtn {
+    margin-top: 4px;
+    margin-bottom: 10px;
 }
 
 .applyChangeBtn {
     background-color: #3EE258;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     color: black;
     width: 145px;
     font-size: 14px;
     font-weight: bold;
+}
+.rectangleSet{
+    margin-left: 5px;
+    margin-right: 5px;
+    padding-bottom: 5px;
+    height: 15px;
+    justify-content:center;
+}
+.pinkRectangle1 {
+    background-color: #FE7171;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    width: 15px;
+}
+
+.pinkRectangle2 {
+    background-color: #FFFFFF;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    width: 15px;
+}
+.techRectangle1 {
+    background-color: #3DDE56;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    width: 15px;
+}
+
+.techRectangle2 {
+    background-color: #0B0B0B;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    width: 15px;
+}
+.reverseRectangle1 {
+    background-color: #FFFFFF;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    width: 15px;
+}
+
+.reverseRectangle2 {
+    background-color: #0B0B0B;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    width: 15px;
+}
+.magentaRectangle1 {
+    background-color: #FF00D0;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    width: 15px;
+}
+
+.magentaRectangle2 {
+    background-color: #0B0B0B;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    width: 15px;
 }

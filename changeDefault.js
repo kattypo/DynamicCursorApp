@@ -7,6 +7,11 @@ window.addEventListener('load', function () {
     const applyBtn = document.getElementById("applyBtn");
     const strokeColorPicker = document.getElementById("strokeColorPicker");
     const fillColorPicker = document.getElementById("fillColorPicker");
+    const customCursorPath = document.getElementById("customCursorPath");
+    const pinkPalette = document.getElementById("pinkPalette");
+    const techPalette = document.getElementById("techPalette");
+    const reversePalette = document.getElementById("reversePalette");
+    const magentaPalette = document.getElementById("magentaPalette");
     backBtn.addEventListener("click", function () {
         window.location.href = "main.html";
     });
@@ -15,18 +20,48 @@ window.addEventListener('load', function () {
         window.location.href = "main.html";
     });
     strokeColorPicker.addEventListener("input", function (event) {
-        const customCursorPath = document.getElementById("customCursorPath");
         customCursorPath.style.stroke = event.target.value;
     });
     strokeColorPicker.addEventListener("change", function (event) {
         defaultCursor.strokeSetting = event.target.value;
     });
     fillColorPicker.addEventListener("input", function (event) {
-        const customCursorPath = document.getElementById("customCursorPath");
         customCursorPath.style.fill = event.target.value;
     });
     fillColorPicker.addEventListener("change", function (event) {
         defaultCursor.fillSetting = event.target.value;
+    });
+    pinkPalette.addEventListener("click", function () {
+        customCursorPath.style.stroke = '#FE7171';
+        customCursorPath.style.fill = '#FFFFFF';
+        defaultCursor.strokeSetting = '#FE7171';
+        defaultCursor.fillSetting = '#FFFFFF';
+        strokeColorPicker.value = '#FE7171';
+        fillColorPicker.value = '#FFFFFF';
+    });
+    techPalette.addEventListener("click", function () {
+        customCursorPath.style.stroke = '#3DDE56';
+        customCursorPath.style.fill = '#0B0B0B';
+        defaultCursor.strokeSetting = '#3DDE56';
+        defaultCursor.fillSetting = '#0B0B0B';
+        strokeColorPicker.value = '#3DDE56';
+        fillColorPicker.value = '#0B0B0B';
+    });
+    reversePalette.addEventListener("click", function () {
+        customCursorPath.style.stroke = '#FFFFFF';
+        customCursorPath.style.fill = '#0B0B0B';
+        defaultCursor.strokeSetting = '#FFFFFF';
+        defaultCursor.fillSetting = '#0B0B0B';
+        strokeColorPicker.value = '#FFFFFF';
+        fillColorPicker.value = '#0B0B0B';
+    });
+    magentaPalette.addEventListener("click", function () {
+        customCursorPath.style.stroke = '#FF00D0';
+        customCursorPath.style.fill = '#0B0B0B';
+        defaultCursor.strokeSetting = '#FF00D0';
+        defaultCursor.fillSetting = '#0B0B0B';
+        strokeColorPicker.value = '#FF00D0';
+        fillColorPicker.value = '#0B0B0B';
     });
     getCurrentDefault();
 });
