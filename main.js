@@ -4,6 +4,7 @@ window.addEventListener('load', function () {
     const addSiteBtn = document.getElementById("addSiteBtn");
     const siteSettingsBtn = document.getElementById("siteSettingsBtn");
     const changeDefaultBtn = document.getElementById("changeDefaultBtn");
+    const sendFeedbackBtn = document.getElementById("sendFeedbackBtn");
     const alertMessage = document.getElementById("alertMessage");
 
     addSiteBtn.addEventListener("click", async function () {
@@ -25,6 +26,9 @@ window.addEventListener('load', function () {
     });
     changeDefaultBtn.addEventListener("click", function () {
         window.location.href = "changeDefault.html";
+    });
+    sendFeedbackBtn.addEventListener("click", function () {
+        window.location.href = "sendFeedback.html";
     });
 });
 function loadMainPage() {
