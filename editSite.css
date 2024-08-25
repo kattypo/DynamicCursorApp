@@ -14,9 +14,9 @@ body {
     margin-bottom: 8px;
 }
 
-.btn {
-    background-color: #3E3E3E;
-    margin-bottom: 8px;
+.backBtn {
+    margin-top: 4px;
+    margin-bottom: 10px;
 }
 
 .applyChangeBtn {
