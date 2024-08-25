@@ -1,14 +1,23 @@
 body {
-    width: 350px;
+    width: 360px;
     background-color: #0B0B0B;
     color: #E2E2E2;
+    max-height: 375px;
+    box-sizing: border-box;
+}
+.container {
+    max-height: 375px;
 }
 .section {
     background-color: #1E1E1E;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     padding-right: 8px;
-    padding-top: 8px;
+    padding-top: 10px;
     padding-bottom: 8px;
+}
+.backBtn {
+    margin-top: 4px;
+    margin-bottom: 10px;
 }
 .editBtn {
     background-color: #3EE258;
@@ -21,4 +30,16 @@ body {
 .removeBtn {
     margin-bottom: 8px;
     width: 130px;
+}
+.container::-webkit-scrollbar {
+    width: 10px; 
+}
+.container::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+.container::-webkit-scrollbar-thumb {
+    background: #888; 
+}
+.container::-webkit-scrollbar-thumb:hover {
+    background: #555; 
 }
