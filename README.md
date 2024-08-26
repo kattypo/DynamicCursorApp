@@ -1,2 +1,2 @@
 # DynamicCursorApp
-A Chrome Extension that allows the user to change their cursor based on the website they are on
+A Chrome extension that allows a user to change their cursor based on the website they are on

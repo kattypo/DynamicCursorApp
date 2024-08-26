@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Dynamic Cursor",
-  "description": "Base Level Extension",
+  "description": "A Chrome extension that allows a user to change their cursor based on the website they are on",
   "version": "1.0",
   "action": {
     "default_popup": "main.html",
@@ -16,12 +16,6 @@
       "matches": [ "<all_urls>" ],
       "css": [ "updateCursor.css" ],
       "js": [ "updateCursor.js" ]
-    }
-  ],
-  "web_accessible_resources": [
-    {
-      "resources": [ "Assets/default_cursor.png" ],
-      "matches": [ "<all_urls>" ]
     }
   ],
   "icons": {
